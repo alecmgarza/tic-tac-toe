@@ -29,3 +29,26 @@ const game = (() => {
 
     return {markBoard};
 })();
+
+const Player = (name) => {
+    const markBoard = () => {
+        let boardSquare = document.getElementsByClassName('board-square');
+        if (Player.name == 'Player1') {
+            boardSquare.onclick = () => {
+                Gameboard.gameboard.push('x');
+            }
+        } else if (Player.name == 'Player2') {
+            boardSquare.onclick = () => {
+                Gameboard.gameboard.push('o');
+            }
+        }
+    }
+
+    return {name, markBoard};
+}
+
+const player1 = Player('Player1');
+const player2 = Player('Player2');
+
+console.log(player1.name);
+console.log(player2.name);
