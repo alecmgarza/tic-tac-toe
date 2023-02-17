@@ -1,5 +1,5 @@
 const Gameboard = (() => {
-    let gameboard = [ "x", "o", "x", "o", "x", "o", "x", "o", "x"];
+    let gameboard = [];
 
     const gameboardContent = () => {
         const gameboard = document.createElement('div');
@@ -25,17 +25,26 @@ const game = (() => {
         };
     };
 
-    /*const createPlayer = () => {
+    const createPlayer = () => {
 
     };
 
-    const startGame = () => {
+    const startButton = document.getElementById('start');
+    const restartButton = document.getElementById('restart');
 
-    };
+    startButton.onclick = () => {
+        startButton.style.display = 'none';
+        restartButton.style.display = 'block';
+    }
+
+    restartButton.onclick = () => {
+        startButton.style.display = 'block';
+        restartButton.style.display = 'none';
+    }
 
     const playerTurn = () => {
 
-    };*/
+    };
 
     Gameboard.gameboardContent(markBoard());
 

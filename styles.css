@@ -9,3 +9,7 @@
 .board-square {
     border: solid black;
 }
+
+#restart {
+    display: none;
+}
