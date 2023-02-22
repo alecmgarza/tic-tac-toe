@@ -2,10 +2,6 @@ const Gameboard = (() => {
     let gameboard = [];
 
     const gameboardContent = () => {
-        const gameboard = document.createElement('div');
-        gameboard.setAttribute('id', 'gameboard');
-        document.body.appendChild(gameboard);
-        document.body.insertBefore(gameboard, document.body.firstChild);
 
         for (let i = 0; i <= 8; i++) {
             let boardSquare = document.createElement('div');
@@ -16,7 +12,7 @@ const Gameboard = (() => {
         };
     };
 
-    return {gameboard, gameboardContent};
+    return {gameboard};
 })();
 
 const boardSquare = document.getElementById('gameboard');
@@ -30,22 +26,36 @@ const game = (() => {
     };
 
     const createPlayer = () => {
-
+        const player1 = Player('Player 1', 'x', true);
+        const player2 = Player('Player 2', 'o', false);
     };
 
     const startButton = document.getElementById('start');
     const restartButton = document.getElementById('restart');
+    const modal = document.getElementById('modal');
     const boardSquare = document.getElementsByClassName('board-square');
+    const submit = document.getElementById('submit');
 
     startButton.onclick = () => {
         startButton.style.display = 'none';
         restartButton.style.display = 'block';
+        modal.style.display = 'block';
         player1Turn();    
     }
 
     restartButton.onclick = () => {
         startButton.style.display = 'block';
         restartButton.style.display = 'none';
+    }
+
+    submit.onclick = () => {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
 
     const player1Turn = () => {
@@ -66,33 +76,19 @@ const game = (() => {
         }
     }
 
-    Gameboard.gameboardContent(markBoard());
-
-    return {markBoard};
+    return {markBoard, createPlayer};
 })();
 
 const Player = (name, mark, turn) => {
 
-    const startButton = document.getElementById('start');
-    const modal = document.getElementById('modal');
-
-    startButton.onclick = () => {
-        modal.style.display = 'block';
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
     return {name, mark, turn};
 }
 
-const player1 = Player('Player1', 'x', true);
-const player2 = Player('Player2', 'o', false);
+const player1 = Player('Player 1', 'x', true);
+const player2 = Player('Player 2', 'o', false);
 
 /* 
 Things to do:
-Figure out why onclick does not trigger player turn function (boardSquare not being recognized)
+Why doesn't onclick trigger player turn function? (boardSquare not being recognized)
+How do I create a player and assign their name to an input value?
 */
