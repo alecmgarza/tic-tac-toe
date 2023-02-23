@@ -1,52 +1,31 @@
 const Gameboard = (() => {
     let gameboard = [];
 
-    const gameboardContent = () => {
-
-        for (let i = 0; i <= 8; i++) {
-            let boardSquare = document.createElement('div');
-            boardSquare.setAttribute('class', 'board-square');
-            boardSquare.setAttribute('id', i);
-            gameboard.appendChild(boardSquare);
-            boardSquare.textContent = Gameboard.gameboard[i];
-        };
-    };
-
     return {gameboard};
 })();
 
-const boardSquare = document.getElementById('gameboard');
 
 
 const game = (() => {
-    const markBoard = () => {
-        for (let i = 0; i < Gameboard.gameboard.length; i++) {
-            return Gameboard.gameboard[i];
-        };
-    };
-
-    const createPlayer = () => {
-        const player1 = Player('Player 1', 'x', true);
-        const player2 = Player('Player 2', 'o', false);
-    };
 
     const startButton = document.getElementById('start');
     const restartButton = document.getElementById('restart');
     const modal = document.getElementById('modal');
-    const boardSquare = document.getElementsByClassName('board-square');
+    const gameboard = document.getElementById('gameboard');
+    const boardSquares = document.getElementsByClassName('board-square');
     const submit = document.getElementById('submit');
 
     startButton.onclick = () => {
         startButton.style.display = 'none';
         restartButton.style.display = 'block';
-        modal.style.display = 'block';
-        player1Turn();    
+        modal.style.display = 'block';    
     }
 
     restartButton.onclick = () => {
         startButton.style.display = 'block';
         restartButton.style.display = 'none';
     }
+
 
     submit.onclick = () => {
         modal.style.display = 'none';
@@ -58,34 +37,58 @@ const game = (() => {
         }
     }
 
+
+
     const player1Turn = () => {
         player1.turn = true;
         player2.turn = false;
-        boardSquare.onclick = () => {
-            console.log('It is player 2 turn');
-            player2Turn();
-        }
-        
     };
 
+    
+
     const player2Turn = () => {
-        player2.turn = true;
         player1.turn = false;
-        boardSquare.onclick = () => {
-            player1Turn();
-        }
+        player2.turn = true;
     }
 
-    return {markBoard, createPlayer};
+    const takeTurns = () => {
+        gameboard.onclick = () => {
+            if (player1.turn) {
+                player2Turn();
+            } else {
+                player1Turn();
+            }
+        }
+    };
+
+    const markBoard = () => {
+        for (let i = 0; i < boardSquares.length; i++) {
+            const boardSquare = boardSquares[i];
+            boardSquare.onclick = () => {
+                if (player1.turn) {
+                    boardSquare.textContent = player1.mark;
+                } else {
+                    boardSquare.textContent = player2.mark;
+                }
+            }
+        }
+    };
+
+    return {markBoard, takeTurns};
 })();
+
+
 
 const Player = (name, mark, turn) => {
 
     return {name, mark, turn};
-}
+};
 
 const player1 = Player('Player 1', 'x', true);
 const player2 = Player('Player 2', 'o', false);
+
+game.markBoard();
+game.takeTurns();
 
 /* 
 Things to do:
