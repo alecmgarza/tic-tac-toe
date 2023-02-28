@@ -1,6 +1,16 @@
 const Gameboard = (() => {
     let gameboard = [];
 
+    function renderMarks() {
+        const boardSquares = document.getElementsByClassName('board-square');
+        for (i = 0; i < gameboard.length; i++) {
+            const boardSquare = boardSquares[i];
+            boardSquare.textContent = gameboard[i];
+        }
+    }
+
+    renderMarks();
+
     return {gameboard};
 })();
 
@@ -12,7 +22,7 @@ const game = (() => {
     const restartButton = document.getElementById('restart');
     const modal = document.getElementById('modal');
     const gameboard = document.getElementById('gameboard');
-    const boardSquares = document.getElementsByClassName('board-square');
+    const boardSquares = document.getElementsByClassName('board-squares');
     const submit = document.getElementById('submit');
 
     startButton.onclick = () => {
@@ -66,9 +76,9 @@ const game = (() => {
             const boardSquare = boardSquares[i];
             boardSquare.onclick = () => {
                 if (player1.turn) {
-                    boardSquare.textContent = player1.mark;
+                    Gameboard.gameboard[i] = player1.mark;
                 } else {
-                    boardSquare.textContent = player2.mark;
+                    Gameboard.gameboard[i] = player2.mark;
                 }
             }
         }
