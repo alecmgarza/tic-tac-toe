@@ -2,16 +2,13 @@ const Gameboard = (() => {
     let gameboard = [];
 
     function renderMarks() {
-        const boardSquares = document.getElementsByClassName('board-square');
         for (i = 0; i < gameboard.length; i++) {
-            const boardSquare = boardSquares[i];
-            boardSquare.textContent = gameboard[i];
+            const boardSquare = document.getElementById(i);
+            boardSquare.textContent = Gameboard.gameboard[i];
         }
     }
 
-    renderMarks();
-
-    return {gameboard};
+    return {gameboard, renderMarks};
 })();
 
 
@@ -80,6 +77,7 @@ const game = (() => {
                 } else {
                     Gameboard.gameboard[i] = player2.mark;
                 }
+                Gameboard.renderMarks();
             }
         }
     };
