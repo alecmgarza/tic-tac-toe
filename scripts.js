@@ -11,7 +11,10 @@ const Gameboard = (() => {
     return {gameboard, renderMarks};
 })();
 
+const Player = (name, mark, turn) => {
 
+    return {name, mark, turn};
+};
 
 const game = (() => {
 
@@ -31,6 +34,8 @@ const game = (() => {
     restartButton.onclick = () => {
         startButton.style.display = 'block';
         restartButton.style.display = 'none';
+        Gameboard.gameboard = '';
+        Gameboard.renderMarks();
     }
 
 
@@ -44,10 +49,32 @@ const game = (() => {
         }
     }
 
+    
+    const namePlayer1 = () => {    
+        const p1Name = document.getElementById('p1-name').value;
+        return p1Name;
+    };
 
+    const player1 = Player(namePlayer1(), 'x', true);
+
+    const namePlayer2 = () => {
+        const p2Name = document.getElementById('p2-name').value;
+        return p2Name;
+    }
+
+    const player2 = Player(namePlayer2(), 'o', false);
+
+    const createPlayers = () => {
+        submit.onclick = () => {
+            modal.style.display = 'none';
+            namePlayer1();
+            namePlayer2();
+        }
+    }
 
     const player1Turn = () => {
         player1.turn = true;
+        console.log(`It's ${player1.name}'s turn!`)
         player2.turn = false;
     };
 
@@ -55,6 +82,7 @@ const game = (() => {
 
     const player2Turn = () => {
         player1.turn = false;
+        console.log(`It's ${player2.name}'s turn!`)
         player2.turn = true;
     }
 
@@ -82,18 +110,8 @@ const game = (() => {
         }
     };
 
-    return {markBoard, takeTurns};
+    return {markBoard, takeTurns, createPlayers};
 })();
-
-
-
-const Player = (name, mark, turn) => {
-
-    return {name, mark, turn};
-};
-
-const player1 = Player('Player 1', 'x', true);
-const player2 = Player('Player 2', 'o', false);
 
 game.markBoard();
 game.takeTurns();
