@@ -16,6 +16,9 @@ const Player = (name, mark, turn) => {
     return {name, mark, turn};
 };
 
+const player1 = Player('Player 1', 'x', true);
+const player2 = Player('Player 2', 'o', false);
+
 const game = (() => {
 
     const startButton = document.getElementById('start');
@@ -51,24 +54,20 @@ const game = (() => {
 
     
     const namePlayer1 = () => {    
-        const p1Name = document.getElementById('p1-name').value;
-        return p1Name;
+        player1.name = document.getElementById('p1-name').value;
     };
 
-    const player1 = Player(namePlayer1(), 'x', true);
-
     const namePlayer2 = () => {
-        const p2Name = document.getElementById('p2-name').value;
-        return p2Name;
+        player2.name = document.getElementById('p2-name').value;
     }
-
-    const player2 = Player(namePlayer2(), 'o', false);
 
     const createPlayers = () => {
         submit.onclick = () => {
             modal.style.display = 'none';
             namePlayer1();
             namePlayer2();
+            console.log(player1.name);
+            console.log(player2.name);
         }
     }
 
@@ -113,11 +112,11 @@ const game = (() => {
     return {markBoard, takeTurns, createPlayers};
 })();
 
+game.createPlayers();
 game.markBoard();
 game.takeTurns();
 
 /* 
 Things to do:
-Why doesn't onclick trigger player turn function? (boardSquare not being recognized)
-How do I create a player and assign their name to an input value?
+Create player and make the variable public.
 */
