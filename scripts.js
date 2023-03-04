@@ -5,6 +5,11 @@ const Gameboard = (() => {
         for (i = 0; i < gameboard.length; i++) {
             const boardSquare = document.getElementById(i);
             boardSquare.textContent = Gameboard.gameboard[i];
+            if (boardSquare.textContent == player1.mark) {
+                boardSquare.style.color = '#306844';
+            } else {
+                boardSquare.style.color = '#950101';
+            }
         }
     }
 

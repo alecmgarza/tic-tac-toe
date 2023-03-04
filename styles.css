@@ -1,3 +1,20 @@
+body {
+    background-color: #0d141b;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    color: #6871F4;
+}
+
+h2 {
+    color: white;
+}
+
+.player-hubs {
+    background-color: #151D25;
+}
+
 #gameboard {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -7,11 +24,20 @@
 }
 
 .board-squares {
-    border: solid black;
+    border: solid #6871F4;
 }
 
 #restart {
     display: none;
+}
+
+button {
+    background-color: #6871F4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
 }
 
 #modal {
@@ -36,8 +62,19 @@
 }
 
 .player-hubs {
-    border: solid black;
+    background-color: #151D25;
+    color: white;
     width: 200px;
     border-radius: 10px;
     text-align: center;
+    box-shadow: 1px 1px 5px #060800;
+    padding: 3px;
+}
+
+#p1-hub-name {
+    color: #306844;
+}
+
+#p2-hub-name {
+    color: #950101;
 }
