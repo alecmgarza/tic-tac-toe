@@ -62,12 +62,15 @@ const game = (() => {
     }
 
     const createPlayers = () => {
+        const p1Hub = document.getElementById('p1-hub-name');
+        const p2Hub = document.getElementById('p2-hub-name');
         submit.onclick = () => {
             modal.style.display = 'none';
             namePlayer1();
             namePlayer2();
-            console.log(player1.name);
-            console.log(player2.name);
+            markBoard();
+            p1Hub.textContent = player1.name;
+            p2Hub.textContent = player2.name;
         }
     }
 
@@ -109,11 +112,10 @@ const game = (() => {
         }
     };
 
-    return {markBoard, takeTurns, createPlayers};
+    return {takeTurns, createPlayers};
 })();
 
 game.createPlayers();
-game.markBoard();
 game.takeTurns();
 
 /* 
