@@ -47,11 +47,12 @@ const game = (() => {
         restartButton.style.display = 'none';
         Gameboard.gameboard = [];
         Gameboard.renderMarks();
-        winMessage.textContent = '';
+        victoryMessage.textContent = '';
     }
 
     submit.onclick = () => {
         modal.style.display = 'none';
+        takeTurns();
     }
 
     window.onclick = (event) => {
@@ -121,40 +122,39 @@ const game = (() => {
 
     const endGame = () => {
         
-        if (Gameboard.gameboard[0,1,2] == 'x' || 
-            Gameboard.gameboard[3,4,5] == 'x' || 
-            Gameboard.gameboard[6,7,8] == 'x' || 
-            Gameboard.gameboard[0,3,6] == 'x' ||
-            Gameboard.gameboard[1,4,7] == 'x' ||
-            Gameboard.gameboard[2,5,8] == 'x' ||
-            Gameboard.gameboard[0,4,8] == 'x' ||
-            Gameboard.gameboard[2,4,6] == 'x') {
+        if (Gameboard.gameboard[0] && Gameboard.gameboard[1] && Gameboard.gameboard[2] == 'x' || 
+            Gameboard.gameboard[3] && Gameboard.gameboard[4] && Gameboard.gameboard[5] == 'x' || 
+            Gameboard.gameboard[6] && Gameboard.gameboard[7] && Gameboard.gameboard[8] == 'x' || 
+            Gameboard.gameboard[0] && Gameboard.gameboard[3] && Gameboard.gameboard[6] == 'x' ||
+            Gameboard.gameboard[1] && Gameboard.gameboard[4] && Gameboard.gameboard[7] == 'x' ||
+            Gameboard.gameboard[2] && Gameboard.gameboard[5] && Gameboard.gameboard[8] == 'x' ||
+            Gameboard.gameboard[0] && Gameboard.gameboard[4] && Gameboard.gameboard[8] == 'x' ||
+            Gameboard.gameboard[2] && Gameboard.gameboard[4] && Gameboard.gameboard[6] == 'x') {
 
             victoryMessage.textContent = `${player1.name} wins!`;
             player1.wins += 1;
             p1Wins.textContent = `Wins: ${player1.wins}`;
 
-        } else if (Gameboard.gameboard[0,1,2] || 
-            Gameboard.gameboard[3,4,5] == 'o' || 
-            Gameboard.gameboard[6,7,8] == 'o' || 
-            Gameboard.gameboard[0,3,6] == 'o' ||
-            Gameboard.gameboard[1,4,7] == 'o' ||
-            Gameboard.gameboard[2,5,8] == 'o' ||
-            Gameboard.gameboard[0,4,8] == 'o' ||
-            Gameboard.gameboard[2,4,6] == 'o') {
+        } else if (Gameboard.gameboard[0] && Gameboard.gameboard[1] && Gameboard.gameboard[2] == 'o' || 
+            Gameboard.gameboard[3] && Gameboard.gameboard[4] && Gameboard.gameboard[5] == 'o' || 
+            Gameboard.gameboard[6] && Gameboard.gameboard[7] && Gameboard.gameboard[8] == 'o' || 
+            Gameboard.gameboard[0] && Gameboard.gameboard[3] && Gameboard.gameboard[6] == 'o' ||
+            Gameboard.gameboard[1] && Gameboard.gameboard[4] && Gameboard.gameboard[7] == 'o' ||
+            Gameboard.gameboard[2] && Gameboard.gameboard[5] && Gameboard.gameboard[8] == 'o' ||
+            Gameboard.gameboard[0] && Gameboard.gameboard[4] && Gameboard.gameboard[8] == 'o' ||
+            Gameboard.gameboard[2] && Gameboard.gameboard[4] && Gameboard.gameboard[6] == 'o') {
             
             victoryMessage.textContent = `${player2.name} wins!`;
             player2.wins += 1;
             p2Wins.textContent = `Wins: ${player2.wins}`
 
-        } else return;
+        }
     }
 
     return {takeTurns, createPlayers};
 })();
 
 game.createPlayers();
-game.takeTurns();
 
 /* 
 Bugs:
