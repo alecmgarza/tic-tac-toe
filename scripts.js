@@ -16,13 +16,13 @@ const Gameboard = (() => {
     return {gameboard, renderMarks};
 })();
 
-const Player = (name, mark, turn) => {
+const Player = (name, mark, wins, turn) => {
 
-    return {name, mark, turn};
+    return {name, mark, wins, turn};
 };
 
-const player1 = Player('Player 1', 'x', true);
-const player2 = Player('Player 2', 'o', false);
+const player1 = Player('Player 1', 'x', 0, true);
+const player2 = Player('Player 2', 'o', 0, false);
 
 const game = (() => {
 
@@ -32,7 +32,9 @@ const game = (() => {
     const gameboard = document.getElementById('gameboard');
     const boardSquares = document.getElementsByClassName('board-squares');
     const submit = document.getElementById('submit');
-    const winMessage = document.querySelector('h2');
+    const victoryMessage = document.getElementById('victory-message');
+    let p1Wins = document.getElementById('p1-wins');
+    let p2Wins = document.getElementById('p2-wins');
 
     startButton.onclick = () => {
         startButton.style.display = 'none';
@@ -119,29 +121,33 @@ const game = (() => {
 
     const endGame = () => {
         
-        if (Gameboard.gameboard[0,1,2] || 
-            Gameboard.gameboard[3,4,5] || 
-            Gameboard.gameboard[6,7,8] || 
-            Gameboard.gameboard[0,3,6] ||
-            Gameboard.gameboard[1,4,7] ||
-            Gameboard.gameboard[2,5,8] ||
-            Gameboard.gameboard[0,4,8] ||
+        if (Gameboard.gameboard[0,1,2] == 'x' || 
+            Gameboard.gameboard[3,4,5] == 'x' || 
+            Gameboard.gameboard[6,7,8] == 'x' || 
+            Gameboard.gameboard[0,3,6] == 'x' ||
+            Gameboard.gameboard[1,4,7] == 'x' ||
+            Gameboard.gameboard[2,5,8] == 'x' ||
+            Gameboard.gameboard[0,4,8] == 'x' ||
             Gameboard.gameboard[2,4,6] == 'x') {
 
-            winMessage.textContent = `${player1.name} wins!`;
+            victoryMessage.textContent = `${player1.name} wins!`;
+            p1Wins += 1;
+            p1Wins.textContent = `Wins: ${player1.wins}`;
 
         } else if (Gameboard.gameboard[0,1,2] || 
-            Gameboard.gameboard[3,4,5] || 
-            Gameboard.gameboard[6,7,8] || 
-            Gameboard.gameboard[0,3,6] ||
-            Gameboard.gameboard[1,4,7] ||
-            Gameboard.gameboard[2,5,8] ||
-            Gameboard.gameboard[0,4,8] ||
+            Gameboard.gameboard[3,4,5] == 'o' || 
+            Gameboard.gameboard[6,7,8] == 'o' || 
+            Gameboard.gameboard[0,3,6] == 'o' ||
+            Gameboard.gameboard[1,4,7] == 'o' ||
+            Gameboard.gameboard[2,5,8] == 'o' ||
+            Gameboard.gameboard[0,4,8] == 'o' ||
             Gameboard.gameboard[2,4,6] == 'o') {
             
-            winMessage.textContent = `${player2.name} wins!`;
+            victoryMessage.textContent = `${player2.name} wins!`;
+            p2Wins += 1;
+            p2Wins.textContent = `Wins: ${player2.wins}`
 
-        }
+        } else return;
     }
 
     return {takeTurns, createPlayers};
@@ -152,9 +158,12 @@ game.takeTurns();
 
 /* 
 Bugs:
-Player can change the mark of a spot on the board to their own.
+- Player can change the mark of a spot on the board to their own.
+- Winning parameters are triggering incorrectly.
+- Players can trigger takeTurns function by clicking the gameboard before a game has started.
+- Restart button not centered.
 
 Still need:
 - Display wins.
-- Style page.
+- Style modal.
 */
