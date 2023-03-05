@@ -63,13 +63,21 @@ const game = (() => {
 
     const namePlayer1 = () => {   
         const p1Hub = document.getElementById('p1-hub-name'); 
-        player1.name = document.getElementById('p1-name').value;
+        if (document.getElementById('p1-name').value == '') {
+            player1.name = 'Player 1';
+        } else {
+            player1.name = document.getElementById('p1-name').value;
+        }
         p1Hub.textContent = player1.name;
     };
 
     const namePlayer2 = () => {
         const p2Hub = document.getElementById('p2-hub-name');
-        player2.name = document.getElementById('p2-name').value;
+        if (document.getElementById('p2-name').value == '') {
+            player2.name = 'Player 2';
+        } else {
+            player2.name = document.getElementById('p2-name').value;
+        }
         p2Hub.textContent = player2.name;
     }
 
@@ -151,7 +159,7 @@ const game = (() => {
         }
     }
 
-    return {takeTurns, createPlayers};
+    return {createPlayers};
 })();
 
 game.createPlayers();
