@@ -33,8 +33,8 @@ const game = (() => {
     const boardSquares = document.getElementsByClassName('board-squares');
     const submit = document.getElementById('submit');
     const victoryMessage = document.getElementById('victory-message');
-    let p1Wins = document.getElementById('p1-wins');
-    let p2Wins = document.getElementById('p2-wins');
+    const p1Wins = document.getElementById('p1-wins');
+    const p2Wins = document.getElementById('p2-wins');
 
     startButton.onclick = () => {
         startButton.style.display = 'none';
@@ -45,7 +45,7 @@ const game = (() => {
     restartButton.onclick = () => {
         startButton.style.display = 'block';
         restartButton.style.display = 'none';
-        Gameboard.gameboard = '';
+        Gameboard.gameboard = [];
         Gameboard.renderMarks();
         winMessage.textContent = '';
     }
@@ -131,7 +131,7 @@ const game = (() => {
             Gameboard.gameboard[2,4,6] == 'x') {
 
             victoryMessage.textContent = `${player1.name} wins!`;
-            p1Wins += 1;
+            player1.wins += 1;
             p1Wins.textContent = `Wins: ${player1.wins}`;
 
         } else if (Gameboard.gameboard[0,1,2] || 
@@ -144,7 +144,7 @@ const game = (() => {
             Gameboard.gameboard[2,4,6] == 'o') {
             
             victoryMessage.textContent = `${player2.name} wins!`;
-            p2Wins += 1;
+            player2.wins += 1;
             p2Wins.textContent = `Wins: ${player2.wins}`
 
         } else return;
