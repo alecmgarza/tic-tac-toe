@@ -38,7 +38,7 @@ const game = (() => {
 
     startButton.onclick = () => {
         startButton.style.display = 'none';
-        restartButton.style.display = 'block';
+        restartButton.style.display = 'inline-block';
         modal.style.display = 'block';    
     }
 
@@ -168,7 +168,6 @@ game.createPlayers();
 Bugs:
 - Player can change the mark of a spot on the board to their own.
 - Winning parameters are triggering incorrectly.
-- Restart button not centered.
 
 Still need:
 - Style modal.
