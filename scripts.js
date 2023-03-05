@@ -43,17 +43,14 @@ const game = (() => {
     }
 
     restartButton.onclick = () => {
-        startButton.style.display = 'block';
+        startButton.style.display = 'inline-block';
         restartButton.style.display = 'none';
         Gameboard.gameboard = [];
         Gameboard.renderMarks();
         victoryMessage.textContent = '';
     }
 
-    submit.onclick = () => {
-        modal.style.display = 'none';
-        takeTurns();
-    }
+    
 
     window.onclick = (event) => {
         if (event.target == modal) {
@@ -113,6 +110,11 @@ const game = (() => {
         }
     };
 
+    submit.onclick = () => {
+        modal.style.display = 'none';
+        
+    }
+
     const markBoard = () => {
         for (let i = 0; i < boardSquares.length; i++) {
             const boardSquare = boardSquares[i];
@@ -130,44 +132,44 @@ const game = (() => {
 
     const endGame = () => {
         
-        if (Gameboard.gameboard[0] && Gameboard.gameboard[1] && Gameboard.gameboard[2] == 'x' || 
-            Gameboard.gameboard[3] && Gameboard.gameboard[4] && Gameboard.gameboard[5] == 'x' || 
-            Gameboard.gameboard[6] && Gameboard.gameboard[7] && Gameboard.gameboard[8] == 'x' || 
-            Gameboard.gameboard[0] && Gameboard.gameboard[3] && Gameboard.gameboard[6] == 'x' ||
-            Gameboard.gameboard[1] && Gameboard.gameboard[4] && Gameboard.gameboard[7] == 'x' ||
-            Gameboard.gameboard[2] && Gameboard.gameboard[5] && Gameboard.gameboard[8] == 'x' ||
-            Gameboard.gameboard[0] && Gameboard.gameboard[4] && Gameboard.gameboard[8] == 'x' ||
-            Gameboard.gameboard[2] && Gameboard.gameboard[4] && Gameboard.gameboard[6] == 'x') {
+        if (Gameboard.gameboard[0] == 'x' && Gameboard.gameboard[1] == 'x' && Gameboard.gameboard[2] == 'x' || 
+            Gameboard.gameboard[3] == 'x' && Gameboard.gameboard[4] == 'x' && Gameboard.gameboard[5] == 'x' || 
+            Gameboard.gameboard[6] == 'x' && Gameboard.gameboard[7] == 'x' && Gameboard.gameboard[8] == 'x' || 
+            Gameboard.gameboard[0] == 'x' && Gameboard.gameboard[3] == 'x' && Gameboard.gameboard[6] == 'x' ||
+            Gameboard.gameboard[1] == 'x' && Gameboard.gameboard[4] == 'x' && Gameboard.gameboard[7] == 'x' ||
+            Gameboard.gameboard[2] == 'x' && Gameboard.gameboard[5] == 'x' && Gameboard.gameboard[8] == 'x' ||
+            Gameboard.gameboard[0] == 'x' && Gameboard.gameboard[4] == 'x' && Gameboard.gameboard[8] == 'x' ||
+            Gameboard.gameboard[2] == 'x' && Gameboard.gameboard[4] == 'x' && Gameboard.gameboard[6] == 'x') {
 
             victoryMessage.textContent = `${player1.name} wins!`;
             player1.wins += 1;
             p1Wins.textContent = `Wins: ${player1.wins}`;
 
-        } else if (Gameboard.gameboard[0] && Gameboard.gameboard[1] && Gameboard.gameboard[2] == 'o' || 
-            Gameboard.gameboard[3] && Gameboard.gameboard[4] && Gameboard.gameboard[5] == 'o' || 
-            Gameboard.gameboard[6] && Gameboard.gameboard[7] && Gameboard.gameboard[8] == 'o' || 
-            Gameboard.gameboard[0] && Gameboard.gameboard[3] && Gameboard.gameboard[6] == 'o' ||
-            Gameboard.gameboard[1] && Gameboard.gameboard[4] && Gameboard.gameboard[7] == 'o' ||
-            Gameboard.gameboard[2] && Gameboard.gameboard[5] && Gameboard.gameboard[8] == 'o' ||
-            Gameboard.gameboard[0] && Gameboard.gameboard[4] && Gameboard.gameboard[8] == 'o' ||
-            Gameboard.gameboard[2] && Gameboard.gameboard[4] && Gameboard.gameboard[6] == 'o') {
+        } else if (Gameboard.gameboard[0] == 'o' && Gameboard.gameboard[1] == 'o' && Gameboard.gameboard[2] == 'o' || 
+            Gameboard.gameboard[3] == 'o' && Gameboard.gameboard[4] == 'o' && Gameboard.gameboard[5] == 'o' || 
+            Gameboard.gameboard[6] == 'o' && Gameboard.gameboard[7] == 'o' && Gameboard.gameboard[8] == 'o' || 
+            Gameboard.gameboard[0] == 'o' && Gameboard.gameboard[3] == 'o' && Gameboard.gameboard[6] == 'o' ||
+            Gameboard.gameboard[1] == 'o' && Gameboard.gameboard[4] == 'o' && Gameboard.gameboard[7] == 'o' ||
+            Gameboard.gameboard[2] == 'o' && Gameboard.gameboard[5] == 'o' && Gameboard.gameboard[8] == 'o' ||
+            Gameboard.gameboard[0] == 'o' && Gameboard.gameboard[4] == 'o' && Gameboard.gameboard[8] == 'o' ||
+            Gameboard.gameboard[2] == 'o' && Gameboard.gameboard[4] == 'o' && Gameboard.gameboard[6] == 'o') {
             
             victoryMessage.textContent = `${player2.name} wins!`;
             player2.wins += 1;
             p2Wins.textContent = `Wins: ${player2.wins}`
 
-        } else return;
+        }
     }
 
-    return {createPlayers};
+    return {createPlayers, takeTurns};
 })();
 
 game.createPlayers();
+game.takeTurns();
 
 /* 
 Bugs:
 - Player can change the mark of a spot on the board to their own.
-- Winning parameters are triggering incorrectly.
 
 Still need:
 - Style modal.
