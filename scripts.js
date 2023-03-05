@@ -156,7 +156,7 @@ const game = (() => {
             player2.wins += 1;
             p2Wins.textContent = `Wins: ${player2.wins}`
 
-        }
+        } else return;
     }
 
     return {createPlayers};
@@ -168,10 +168,8 @@ game.createPlayers();
 Bugs:
 - Player can change the mark of a spot on the board to their own.
 - Winning parameters are triggering incorrectly.
-- Players can trigger takeTurns function by clicking the gameboard before a game has started.
 - Restart button not centered.
 
 Still need:
-- Display wins.
 - Style modal.
 */
