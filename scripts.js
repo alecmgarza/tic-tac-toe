@@ -32,22 +32,20 @@ const game = (() => {
     const gameboard = document.getElementById('gameboard');
     const boardSquares = document.getElementsByClassName('board-squares');
     const submit = document.getElementById('submit');
-    const victoryMessage = document.getElementById('victory-message');
+    const infoMessage = document.getElementById('info-message');
     const p1Wins = document.getElementById('p1-wins');
     const p2Wins = document.getElementById('p2-wins');
 
     startButton.onclick = () => {
         startButton.style.display = 'none';
         restartButton.style.display = 'inline-block';
-        modal.style.display = 'block';    
+        modal.style.display = 'block'; 
+        player1.turn = true;
+        player2.turn = false;   
     }
 
     restartButton.onclick = () => {
-        startButton.style.display = 'inline-block';
-        restartButton.style.display = 'none';
-        Gameboard.gameboard = [];
-        Gameboard.renderMarks();
-        victoryMessage.textContent = '';
+        window.location.reload();
     }
 
     
@@ -81,6 +79,7 @@ const game = (() => {
     const createPlayers = () => {
         submit.onclick = () => {
             modal.style.display = 'none';
+            
 
             namePlayer1();
             namePlayer2();
@@ -90,13 +89,11 @@ const game = (() => {
 
     const player1Turn = () => {
         player1.turn = true;
-        console.log(`It's ${player1.name}'s turn!`)
         player2.turn = false;
     };
 
     const player2Turn = () => {
         player1.turn = false;
-        console.log(`It's ${player2.name}'s turn!`)
         player2.turn = true;
     }
 
@@ -112,7 +109,6 @@ const game = (() => {
 
     submit.onclick = () => {
         modal.style.display = 'none';
-        
     }
 
     const markBoard = () => {
@@ -141,7 +137,7 @@ const game = (() => {
             Gameboard.gameboard[0] == 'x' && Gameboard.gameboard[4] == 'x' && Gameboard.gameboard[8] == 'x' ||
             Gameboard.gameboard[2] == 'x' && Gameboard.gameboard[4] == 'x' && Gameboard.gameboard[6] == 'x') {
 
-            victoryMessage.textContent = `${player1.name} wins!`;
+            infoMessage.textContent = `${player1.name} wins!`;
             player1.wins += 1;
             p1Wins.textContent = `Wins: ${player1.wins}`;
 
@@ -154,7 +150,7 @@ const game = (() => {
             Gameboard.gameboard[0] == 'o' && Gameboard.gameboard[4] == 'o' && Gameboard.gameboard[8] == 'o' ||
             Gameboard.gameboard[2] == 'o' && Gameboard.gameboard[4] == 'o' && Gameboard.gameboard[6] == 'o') {
             
-            victoryMessage.textContent = `${player2.name} wins!`;
+            infoMessage.textContent = `${player2.name} wins!`;
             player2.wins += 1;
             p2Wins.textContent = `Wins: ${player2.wins}`
 
@@ -170,6 +166,7 @@ game.takeTurns();
 /* 
 Bugs:
 - Player can change the mark of a spot on the board to their own.
+- One spot did not get marked in a 2nd game.
 
 Still need:
 - Style modal.
