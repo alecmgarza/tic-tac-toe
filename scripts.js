@@ -38,6 +38,8 @@ const game = (() => {
     const infoMessage = document.getElementById('info-message');
     const p1Wins = document.getElementById('p1-wins');
     const p2Wins = document.getElementById('p2-wins');
+    const p1HubName = document.getElementById('p1-hub-name');
+    const p2HubName = document.getElementById('p2-hub-name');
 
     startButton.onclick = () => {
         startButton.style.display = 'none';
@@ -81,6 +83,7 @@ const game = (() => {
     const createPlayers = () => {
         submit.onclick = () => {
             modal.style.display = 'none';
+            p1HubName.style.textDecoration = 'underline';
             
             namePlayer1();
             namePlayer2();
@@ -91,11 +94,15 @@ const game = (() => {
     const player1Turn = () => {
         player1.turn = true;
         player2.turn = false;
+        p1HubName.style.textDecoration = 'underline';
+        p2HubName.style.textDecoration = 'none';
     };
 
     const player2Turn = () => {
         player1.turn = false;
         player2.turn = true;
+        p1HubName.style.textDecoration = 'none';
+        p2HubName.style.textDecoration = 'underline';
     }
 
     const takeTurns = () => {
@@ -125,6 +132,7 @@ const game = (() => {
 
     playAgain.onclick = () => {
         playAgain.style.display = 'none';
+        p1HubName.style.textDecoration = 'underline';
         Gameboard.gameboard = [];
         Gameboard.renderMarks();
         markBoard();
@@ -187,4 +195,5 @@ game.takeTurns();
 /* 
 Bugs:
 - Player can change the mark of a spot on the board to their own.
+- Spots on gameboard remain changeable after a player has won.
 */
