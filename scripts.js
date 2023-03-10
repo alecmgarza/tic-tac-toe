@@ -52,8 +52,6 @@ const game = (() => {
         window.location.reload();
     }
 
-    
-
     window.onclick = (event) => {
         if (event.target == modal) {
             modal.style.display = "none";
@@ -84,7 +82,6 @@ const game = (() => {
         submit.onclick = () => {
             modal.style.display = 'none';
             
-
             namePlayer1();
             namePlayer2();
             markBoard();
@@ -110,10 +107,6 @@ const game = (() => {
             }
         }
     };
-
-    submit.onclick = () => {
-        modal.style.display = 'none';
-    }
 
     const markBoard = () => {
         for (let i = 0; i < boardSquares.length; i++) {
@@ -194,7 +187,4 @@ game.takeTurns();
 /* 
 Bugs:
 - Player can change the mark of a spot on the board to their own.
-
-Need to:
-- Add a tie game parameter.
 */

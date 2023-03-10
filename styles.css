@@ -125,3 +125,19 @@ form div {
 #p2-hub-name {
     color: #950101;
 }
+
+.top-row {
+    border-top: none;
+}
+
+.bottom-row {
+    border-bottom: none;
+}
+
+.left-row {
+    border-left: none;
+}
+
+.right-row {
+    border-right: none;
+}
