@@ -171,6 +171,18 @@ const game = (() => {
             p2Wins.textContent = `Wins: ${player2.wins}`
             playAgain.style.display = 'inline-block';
 
+        } else if ((Gameboard.gameboard[0] == 'x' || Gameboard.gameboard[0] == 'o') &&
+        (Gameboard.gameboard[1] == 'x' || Gameboard.gameboard[1] == 'o') &&
+        (Gameboard.gameboard[2] == 'x' || Gameboard.gameboard[2] == 'o') &&
+        (Gameboard.gameboard[3] == 'x' || Gameboard.gameboard[3] == 'o') &&
+        (Gameboard.gameboard[4] == 'x' || Gameboard.gameboard[4] == 'o') &&
+        (Gameboard.gameboard[5] == 'x' || Gameboard.gameboard[5] == 'o') &&
+        (Gameboard.gameboard[6] == 'x' || Gameboard.gameboard[6] == 'o') &&
+        (Gameboard.gameboard[7] == 'x' || Gameboard.gameboard[7] == 'o') &&
+        (Gameboard.gameboard[8] == 'x' || Gameboard.gameboard[8] == 'o')) {
+
+            infoMessage.textContent = 'Game tied.';
+            playAgain.style.display = 'inline-block';
         }
     }
 
