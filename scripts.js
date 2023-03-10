@@ -2,8 +2,10 @@ const Gameboard = (() => {
     let gameboard = [];
 
     function renderMarks() {
+        gameboard.length = 9;
         for (i = 0; i < gameboard.length; i++) {
-            const boardSquare = document.getElementById(i);
+            const boardSquares = document.getElementsByClassName('board-squares');
+            const boardSquare = boardSquares[i];
             boardSquare.textContent = Gameboard.gameboard[i];
             if (boardSquare.textContent == player1.mark) {
                 boardSquare.style.color = '#306844';
@@ -28,6 +30,7 @@ const game = (() => {
 
     const startButton = document.getElementById('start');
     const restartButton = document.getElementById('restart');
+    const playAgain = document.getElementById('play-again');
     const modal = document.getElementById('modal');
     const gameboard = document.getElementById('gameboard');
     const boardSquares = document.getElementsByClassName('board-squares');
@@ -41,7 +44,8 @@ const game = (() => {
         restartButton.style.display = 'inline-block';
         modal.style.display = 'block'; 
         player1.turn = true;
-        player2.turn = false;   
+        player2.turn = false;
+        createPlayers();  
     }
 
     restartButton.onclick = () => {
@@ -126,6 +130,17 @@ const game = (() => {
         }
     };
 
+    playAgain.onclick = () => {
+        playAgain.style.display = 'none';
+        Gameboard.gameboard = [];
+        Gameboard.renderMarks();
+        markBoard();
+        player1.turn = true;
+        player2.turn = false;
+        infoMessage.textContent = '';
+        takeTurns();
+    }
+
     const endGame = () => {
         
         if (Gameboard.gameboard[0] == 'x' && Gameboard.gameboard[1] == 'x' && Gameboard.gameboard[2] == 'x' || 
@@ -140,6 +155,7 @@ const game = (() => {
             infoMessage.textContent = `${player1.name} wins!`;
             player1.wins += 1;
             p1Wins.textContent = `Wins: ${player1.wins}`;
+            playAgain.style.display = 'inline-block';
 
         } else if (Gameboard.gameboard[0] == 'o' && Gameboard.gameboard[1] == 'o' && Gameboard.gameboard[2] == 'o' || 
             Gameboard.gameboard[3] == 'o' && Gameboard.gameboard[4] == 'o' && Gameboard.gameboard[5] == 'o' || 
@@ -153,21 +169,20 @@ const game = (() => {
             infoMessage.textContent = `${player2.name} wins!`;
             player2.wins += 1;
             p2Wins.textContent = `Wins: ${player2.wins}`
+            playAgain.style.display = 'inline-block';
 
         }
     }
 
-    return {createPlayers, takeTurns};
+    return {takeTurns};
 })();
 
-game.createPlayers();
 game.takeTurns();
 
 /* 
 Bugs:
 - Player can change the mark of a spot on the board to their own.
-- One spot did not get marked in a 2nd game.
 
-Still need:
-- Style modal.
+Need to:
+- Add a tie game parameter.
 */
