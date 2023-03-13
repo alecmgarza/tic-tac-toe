@@ -15,5 +15,5 @@ Players have the ability to type their names into an input field and have them a
 - A player can change the mark of a spot on the gameboard after the other player has already marked it.
 
 ## Contact
-Email: alecmgarza@gmail.com
-LinkedIn: www.linkedin.com/in/alecmgarza
+- Email: alecmgarza@gmail.com
+- LinkedIn: www.linkedin.com/in/alecmgarza
