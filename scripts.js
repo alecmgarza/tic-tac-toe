@@ -139,6 +139,7 @@ const game = (() => {
         player1.turn = true;
         player2.turn = false;
         infoMessage.textContent = '';
+        gameboard.style.pointerEvents = 'auto';
         takeTurns();
     }
 
@@ -157,6 +158,7 @@ const game = (() => {
             player1.wins += 1;
             p1Wins.textContent = `Wins: ${player1.wins}`;
             playAgain.style.display = 'inline-block';
+            gameboard.style.pointerEvents = 'none';
 
         } else if (Gameboard.gameboard[0] == 'o' && Gameboard.gameboard[1] == 'o' && Gameboard.gameboard[2] == 'o' || 
             Gameboard.gameboard[3] == 'o' && Gameboard.gameboard[4] == 'o' && Gameboard.gameboard[5] == 'o' || 
@@ -171,6 +173,7 @@ const game = (() => {
             player2.wins += 1;
             p2Wins.textContent = `Wins: ${player2.wins}`
             playAgain.style.display = 'inline-block';
+            gameboard.style.pointerEvents = 'none';
 
         } else if ((Gameboard.gameboard[0] == 'x' || Gameboard.gameboard[0] == 'o') &&
         (Gameboard.gameboard[1] == 'x' || Gameboard.gameboard[1] == 'o') &&
@@ -184,6 +187,7 @@ const game = (() => {
 
             infoMessage.textContent = 'Game tied.';
             playAgain.style.display = 'inline-block';
+            gameboard.style.pointerEvents = 'none';
         }
     }
 
