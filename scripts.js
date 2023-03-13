@@ -120,14 +120,14 @@ const game = (() => {
             const boardSquare = boardSquares[i];
             boardSquare.onclick = () => {
                 if (player1.turn) {
-                    Gameboard.gameboard[i] = player1.mark;
+                    Gameboard.gameboard[i] = player1.mark;    
                 } else {
-                    Gameboard.gameboard[i] = player2.mark;
+                    Gameboard.gameboard[i] = player2.mark;   
                 }
                 Gameboard.renderMarks();
                 endGame();
             }
-        }
+        } 
     };
 
     playAgain.onclick = () => {
